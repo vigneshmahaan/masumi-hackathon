@@ -1,0 +1,7 @@
+crewai
+python-dotenv
+requests
+sounddevice
+numpy
+whisper
+pyttsx3
