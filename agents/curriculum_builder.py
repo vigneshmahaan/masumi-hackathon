@@ -1,14 +1,11 @@
-from crewai import Agent
+from agents.web_fetcher import fetch_topic_content, search_duckduckgo
 
-def generate_curriculum(topic):
-    """
-    Generate a structured 7-day curriculum for the given topic.
-    """
-    curriculum_agent = Agent(
-        role="Curriculum Designer",
-        goal=f"Design a structured learning curriculum for {topic}.",
-        backstory="An expert in creating well-organized learning materials for students of all levels using AI.",
-    )
+def generate_curriculum(topic: str) -> str:
+    """Generate a simple structured 7-day curriculum based on web content."""
+    content = fetch_topic_content(topic)
+    if not content:
+        search_results = search_duckduckgo(topic, max_results=3)
+        content = "\n".join(r['snippet'] for r in search_results if r['snippet'])
 
     sections = [
         f"1. Introduction to {topic}",
@@ -19,5 +16,7 @@ def generate_curriculum(topic):
         f"6. Summary and Next Steps"
     ]
 
-    curriculum = "\n".join(sections)
-    return curriculum
+    curriculum_text = "\n".join(sections)
+    # append fetched content for more detail
+    curriculum_text += "\n\n" + content[:1000]  # first 1000 chars
+    return curriculum_text

@@ -1,7 +1,9 @@
-crewai
-python-dotenv
-requests
-sounddevice
+
 numpy
-whisper
+sounddevice
 pyttsx3
+wikipedia
+duckduckgo-search
+whisper
+requests
+crewai
