@@ -1,7 +1,7 @@
 from agents.web_fetcher import fetch_topic_content, search_duckduckgo
 
 def generate_curriculum(topic: str) -> str:
-    """Generate a simple structured 7-day curriculum based on web content."""
+    """Generate a simple 7-day curriculum based on web content."""
     content = fetch_topic_content(topic)
     if not content:
         search_results = search_duckduckgo(topic, max_results=3)
@@ -17,6 +17,5 @@ def generate_curriculum(topic: str) -> str:
     ]
 
     curriculum_text = "\n".join(sections)
-    # append fetched content for more detail
-    curriculum_text += "\n\n" + content[:1000]  # first 1000 chars
+    curriculum_text += "\n\n" + content[:1000]  # add first 1000 chars of content
     return curriculum_text

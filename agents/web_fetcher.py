@@ -18,7 +18,7 @@ def search_duckduckgo(query: str, max_results: int = 5):
         for r in results:
             processed.append({
                 "title": r.get("title", ""),
-                "href": r.get("link", ""),   # corrected key
+                "href": r.get("link", ""),  # corrected key
                 "snippet": r.get("body", "")
             })
         return processed
