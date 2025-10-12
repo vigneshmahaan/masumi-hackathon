@@ -1,3 +1,4 @@
+import os
 import gradio as gr
 from agents.curriculum_builder import generate_curriculum
 from agents.summarizer import summarize_curriculum
@@ -21,5 +22,7 @@ iface = gr.Interface(
     description="Generates curriculum, summary, and quiz for any topic."
 )
 
-# Render requires server_name and port
-iface.launch(server_name="0.0.0.0", server_port=8080)
+# ✅ Corrected launch for Railway
+if __name__ == "__main__":
+    port = int(os.getenv("PORT", 7860))  # Railway gives dynamic port
+    iface.launch(server_name="0.0.0.0", server_port=port, share=True)
